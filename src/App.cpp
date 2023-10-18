@@ -106,7 +106,7 @@ public:
 	ren->Render();
 
 	// process wx events
-	Tick();
+	WxTick();
   }
 
 /*****************************************************************************/
@@ -128,7 +128,7 @@ public:
 	widget->ProcessWindowEvent(event);
 
 	// process wx events
-	Tick();
+	WxTick();
   }
 
 /*****************************************************************************/
@@ -144,7 +144,7 @@ public:
 	widget->ProcessWindowEvent(event);
 
 	// process wx events
-	Tick();
+	WxTick();
   }
 
 /*****************************************************************************/
@@ -187,7 +187,7 @@ protected:
 
 /*****************************************************************************/
 
-  void Tick()
+  void WxTick()
   {
 	  // activate inner event loop
 	  wxEventLoopActivator activate(&loop);
