@@ -2,15 +2,15 @@
 #include "Utils.h"
 #include <vtkGenericRenderWindowInteractor.h>
 #include <vtkInteractorStyleTrackballCamera.h>
+#include <vtkOpenGLRenderWindow.h>
 #include <vtkRenderWindow.h>
 
 MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_)
     : panel{panel_} {
-  this->RenderWindow = RenderWindow_;
   // auto g = new vtkGenericRenderWindowInteractor();
 
   // this->RenderWindow->Delete();
-  SetRenderWindow(vtkSmartPointer<vtkRenderWindow>::New());
+  SetRenderWindow(vtkSmartPointer<vtkOpenGLRenderWindow>::New());
   DEBUG_MESSAGE("%s", "MyInteractor::MyInteractor()");
 }
 
@@ -26,12 +26,12 @@ void MyInteractor::Initialize() {
 
   auto rw = GetRenderWindow();
   auto native_handle = utils::NativeHandle(panel);
-  DEBUG_MESSAGE("MyInteractor::Initialize(), native handle = %p",
+  DEBUG_MESSAGE("MyInteractor::Initialize(), rw = %p, native handle = %p", rw,
                 native_handle);
 
   rw->SetWindowId(native_handle);
   rw->SetParentId(utils::NativeHandle(panel->GetParent()));
-  rw->SetDisplayId(RenderWindow->GetGenericDisplayId());
+  rw->SetDisplayId(rw->GetGenericDisplayId());
 
   int *size = rw->GetSize();
   DEBUG_MESSAGE("MyInteractor::Initialize(), sz = %u x %u", size[0], size[1]);

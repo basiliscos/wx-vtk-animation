@@ -78,7 +78,9 @@ MyPanel::~MyPanel() {
 void MyPanel::OnRender(wxPaintEvent &event) {
   interactor->Render();
   auto rw = interactor->GetRenderWindow();
-  DEBUG_MESSAGE("MyPanel::OnRender, native = %p", rw->GetGenericWindowId());
+
+  DEBUG_MESSAGE("MyPanel::OnRender, rw = %p, native = %p", rw,
+                rw->GetGenericWindowId());
   rw->WaitForCompletion();
 
   rw->Render();
