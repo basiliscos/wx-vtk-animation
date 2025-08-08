@@ -14,4 +14,3 @@ struct MyInteractor : vtkRenderWindowInteractor {
 private:
   wxPanel *panel;
 };
-

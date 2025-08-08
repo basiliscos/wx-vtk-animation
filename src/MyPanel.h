@@ -2,10 +2,10 @@
 
 #include "MyInteractor.h"
 
-#include <wx/wx.h>
 #include <wx/bookctrl.h>
-#include <wx/notebook.h>
 #include <wx/listbook.h>
+#include <wx/notebook.h>
+#include <wx/wx.h>
 
 struct MyPanel : public wxPanel {
   using Parent = wxPanel;

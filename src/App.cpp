@@ -8,7 +8,6 @@
 #include "MyPanel.h"
 #include "Utils.h"
 
-
 class MyApp : public wxApp {
 public:
   using Parent = wxApp;

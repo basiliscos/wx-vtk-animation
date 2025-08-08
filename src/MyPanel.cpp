@@ -13,7 +13,6 @@
 #include <vtkRenderer.h>
 #include <vtkSphereSource.h>
 
-
 BEGIN_EVENT_TABLE(MyPanel, wxPanel)
 EVT_PAINT(MyPanel::OnRender)
 EVT_SIZE(MyPanel::OnResize)

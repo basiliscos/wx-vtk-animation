@@ -36,4 +36,3 @@ void MyInteractor::UpdateSize(int w, int h) {
     panel->Refresh();
   }
 }
-
