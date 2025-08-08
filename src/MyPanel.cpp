@@ -89,6 +89,8 @@ void MyPanel::OnRender(wxPaintEvent &event) {
       DEBUG_MESSAGE("%s", "MyPanel::OnRender, reinitializing...");
       auto native_handle = utils::NativeHandle(this);
       rw->SetWindowId(native_handle);
+      rw->SetParentId(reinterpret_cast<void *>(utils::NativeHandle(GetParent())));
+
       auto sz = GetSize();
       rw->SetSize(sz.x, sz.y);
   }

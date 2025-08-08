@@ -11,6 +11,7 @@ MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_)
     this->RenderWindow = NULL;
     this->SetRenderWindow(vtkRenderWindow::New());
     this->RenderWindow->Delete();
+    Enable();
   // auto g = new vtkGenericRenderWindowInteractor();
 
   // this->RenderWindow->Delete();
@@ -25,6 +26,7 @@ MyInteractor::~MyInteractor() {
 
 void MyInteractor::Initialize() {
   Parent::Initialize();
+  Enable();
 
   vtkNew<vtkInteractorStyleTrackballCamera> style;
   SetInteractorStyle(style);
