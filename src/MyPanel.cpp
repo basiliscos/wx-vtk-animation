@@ -19,11 +19,15 @@ EVT_SIZE(MyPanel::OnResize)
 END_EVENT_TABLE()
 
 MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
-    : Parent(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize,
+    : Parent(parent, wxID_ANY, wxDefaultPosition, {200, 100},
              wxFULL_REPAINT_ON_RESIZE) {
   SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
+  auto render_window = vtkSmartPointer<vtkRenderWindow>::New();
+
   interactor = new MyInteractor(this);
+  interactor->SetRenderWindow(render_window);
+
   renderer = vtkRenderer::New();
   interactor->GetRenderWindow()->AddRenderer(renderer);
 
