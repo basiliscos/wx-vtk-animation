@@ -49,10 +49,6 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   actor->GetProperty()->SetColor(colors->GetColor3d(sphere_color).GetData());
 
   renderer->AddActor(actor);
-  // interactor->GetRenderWindow()->Render();
-  // interactor->GetRenderWindow()->Render();
-  // interactor->GetRenderWindow()->Render();
-  interactor->GetRenderWindow()->GetRenderers()->InitTraversal();
   interactor->GetRenderWindow()->Render();
   interactor->Start();
 
@@ -81,29 +77,11 @@ MyPanel::~MyPanel() {
 }
 
 void MyPanel::OnRender(wxPaintEvent &event) {
-    wxPaintDC dc(this);
-
-  // interactor->Render();
   auto rw = interactor->GetRenderWindow();
 
   DEBUG_MESSAGE("MyPanel::OnRender, rw = %p, native = %p", rw,
                 rw->GetGenericWindowId());
-
-  if (!rw->GetGenericWindowId()) {
-      DEBUG_MESSAGE("%s", "MyPanel::OnRender, reinitializing...");
-      auto native_handle = utils::NativeHandle(this);
-      rw->SetWindowId(native_handle);
-      rw->SetParentId(reinterpret_cast<void *>(utils::NativeHandle(GetParent())));
-
-      auto sz = GetSize();
-      rw->SetSize(sz.x, sz.y);
-  }
-
-  rw->WaitForCompletion();
-
   rw->Render();
-  rw->Frame();
-  // Refresh();
 }
 
 void MyPanel::OnResize(wxSizeEvent &evt) {
