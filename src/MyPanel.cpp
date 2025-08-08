@@ -22,14 +22,15 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
     : Parent(parent, wxID_ANY, wxDefaultPosition, {200, 100},
              wxFULL_REPAINT_ON_RESIZE) {
   SetBackgroundStyle(wxBG_STYLE_CUSTOM);
+  SetMinSize(wxSize(250, 250));
 
-  auto render_window = vtkSmartPointer<vtkRenderWindow>::New();
+  render_window = vtkSmartPointer<vtkRenderWindow>::New();
 
   interactor = new MyInteractor(this);
   interactor->SetRenderWindow(render_window);
 
   renderer = vtkRenderer::New();
-  interactor->GetRenderWindow()->AddRenderer(renderer);
+  render_window->AddRenderer(renderer);
 
   renderer->SetBackground(0, 0, 0);
   renderer->ResetCamera();
@@ -52,7 +53,7 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   actor->GetProperty()->SetColor(colors->GetColor3d(sphere_color).GetData());
 
   renderer->AddActor(actor);
-  interactor->GetRenderWindow()->Render();
+  // interactor->GetRenderWindow()->Render();
   interactor->Start();
 
   parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);

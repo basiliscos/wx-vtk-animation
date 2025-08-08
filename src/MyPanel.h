@@ -28,6 +28,7 @@ struct MyPanel : public wxPanel {
 
   MyInteractor *interactor;
   vtkRenderer *renderer;
+  vtkSmartPointer<vtkRenderWindow> render_window;
 
   DECLARE_EVENT_TABLE()
 };
