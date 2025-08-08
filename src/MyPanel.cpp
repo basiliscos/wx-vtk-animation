@@ -78,8 +78,7 @@ MyPanel::~MyPanel() {
 }
 
 void MyPanel::OnRender(wxPaintEvent &event) {
- event.Skip();
- wxClientDC dc(this);
+    wxPaintDC dc(this);
 
   // interactor->Render();
   auto rw = interactor->GetRenderWindow();
