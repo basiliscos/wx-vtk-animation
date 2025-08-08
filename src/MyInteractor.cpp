@@ -7,11 +7,15 @@
 
 MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_)
     : panel{panel_} {
+
+    this->RenderWindow = NULL;
+    this->SetRenderWindow(vtkRenderWindow::New());
+    this->RenderWindow->Delete();
   // auto g = new vtkGenericRenderWindowInteractor();
 
   // this->RenderWindow->Delete();
   // SetRenderWindow(vtkSmartPointer<vtkOpenGLRenderWindow>::New());
-  SetRenderWindow(vtkSmartPointer<vtkRenderWindow>::New());
+  // SetRenderWindow(vtkSmartPointer<vtkRenderWindow>::New());
   DEBUG_MESSAGE("%s", "MyInteractor::MyInteractor()");
 }
 
