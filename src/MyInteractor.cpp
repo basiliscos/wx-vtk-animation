@@ -16,7 +16,6 @@ void MyInteractor::Initialize() {
   DEBUG_MESSAGE("%s", "MyInteractor::Initialize()");
   Parent::Initialize();
 
-
   vtkNew<vtkInteractorStyleTrackballCamera> style;
   SetInteractorStyle(style);
 
@@ -37,6 +36,5 @@ void MyInteractor::UpdateSize(int w, int h) {
     Size[0] = w;
     Size[1] = h;
     RenderWindow->SetSize(w, h);
-    panel->Refresh();
   }
 }
