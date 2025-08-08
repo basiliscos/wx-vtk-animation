@@ -34,6 +34,8 @@ void MyInteractor::Initialize() {
   rw->SetParentId(utils::NativeHandle(panel->GetParent()));
   rw->SetDisplayId(rw->GetGenericDisplayId());
 
+  rw->InitializeFromCurrentContext();
+
   int *size = rw->GetSize();
   DEBUG_MESSAGE("MyInteractor::Initialize(), sz = %u x %u", size[0], size[1]);
 
