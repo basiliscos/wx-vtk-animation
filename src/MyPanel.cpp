@@ -53,7 +53,7 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   actor->GetProperty()->SetColor(colors->GetColor3d(sphere_color).GetData());
 
   renderer->AddActor(actor);
-  // interactor->GetRenderWindow()->Render();
+  interactor->GetRenderWindow()->Render();
   interactor->Start();
 
   parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
