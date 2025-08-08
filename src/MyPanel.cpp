@@ -76,11 +76,23 @@ MyPanel::~MyPanel() {
 }
 
 void MyPanel::OnRender(wxPaintEvent &event) {
+ event.Skip();
+ wxClientDC dc(this);
+
   interactor->Render();
   auto rw = interactor->GetRenderWindow();
 
   DEBUG_MESSAGE("MyPanel::OnRender, rw = %p, native = %p", rw,
                 rw->GetGenericWindowId());
+
+  if (!rw->GetGenericWindowId()) {
+      DEBUG_MESSAGE("%s", "MyPanel::OnRender, reinitializing...");
+      auto native_handle = utils::NativeHandle(this);
+      rw->SetWindowId(native_handle);
+      auto sz = GetSize();
+      rw->SetSize(sz.x, sz.y);
+  }
+
   rw->WaitForCompletion();
 
   rw->Render();
