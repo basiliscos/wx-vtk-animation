@@ -101,7 +101,7 @@ void MyPanel::OnRender(wxPaintEvent &event) {
 
   rw->Render();
   rw->Frame();
-  Refresh();
+  // Refresh();
 }
 
 void MyPanel::OnResize(wxSizeEvent &evt) {
