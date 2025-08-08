@@ -53,9 +53,14 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
 
   parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
   parent->Bind(wxEVT_LISTBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
-}
 
-/*****************************************************************************/
+  Bind(wxEVT_MOTION, &MyPanel::OnMouseMove, this);
+  Bind(wxEVT_MOUSEWHEEL, &MyPanel::OnMouseScroll, this);
+  Bind(wxEVT_LEFT_DOWN, &MyPanel::OnMouseDown, this);
+  Bind(wxEVT_LEFT_UP, &MyPanel::OnMouseUp, this);
+  Bind(wxEVT_RIGHT_DOWN, &MyPanel::OnMouseRightDown, this);
+  Bind(wxEVT_RIGHT_UP, &MyPanel::OnMouseRightUp, this);
+}
 
 MyPanel::~MyPanel() {
   DEBUG_MESSAGE("%s", "MyPanel::~MyPanel");
@@ -64,14 +69,10 @@ MyPanel::~MyPanel() {
   interactor->Delete();
 }
 
-/*****************************************************************************/
-
 void MyPanel::OnRender(wxPaintEvent &event) {
   DEBUG_MESSAGE("%s", "MyPanel::OnRender");
   interactor->GetRenderWindow()->Render();
 }
-
-/*****************************************************************************/
 
 void MyPanel::OnResize(wxSizeEvent &evt) {
   auto w = evt.GetSize().GetWidth();
@@ -81,11 +82,47 @@ void MyPanel::OnResize(wxSizeEvent &evt) {
   Refresh();
 }
 
-/*****************************************************************************/
-
 void MyPanel::OnTabChange(wxBookCtrlEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyFrame::OnTabChange", this);
   // interactor->GetRenderWindow()->Initialize();
   // interactor->Initialize();
   // interactor->GetRenderWindow()->WindowRemap();
+}
+
+void MyPanel::OnMouseDown(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseDown", this);
+  Invoke(vtkCommand::LeftButtonPressEvent);
+}
+
+void MyPanel::OnMouseUp(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseUp", this);
+  Invoke(vtkCommand::LeftButtonReleaseEvent);
+}
+
+void MyPanel::OnMouseRightDown(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightDown", this);
+  Invoke(vtkCommand::RightButtonPressEvent);
+}
+
+void MyPanel::OnMouseRightUp(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightUp", this);
+  Invoke(vtkCommand::RightButtonReleaseEvent);
+}
+
+void MyPanel::OnMouseMove(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseMove", this);
+  Invoke(vtkCommand::MouseMoveEvent);
+}
+
+void MyPanel::OnMouseScroll(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseScroll", this);
+
+  auto command = event.GetWheelRotation() > 0
+                     ? vtkCommand::MouseWheelForwardEvent
+                     : vtkCommand::MouseWheelBackwardEvent;
+  Invoke(command);
+}
+
+void MyPanel::Invoke(unsigned long event, void *callData) {
+  interactor->InvokeEvent(event, callData);
 }

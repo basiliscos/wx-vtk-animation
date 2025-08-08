@@ -17,6 +17,15 @@ struct MyPanel : public wxPanel {
   void OnResize(wxSizeEvent &evt);
   void OnTabChange(wxBookCtrlEvent &);
 
+  void OnMouseDown(wxMouseEvent &event);
+  void OnMouseUp(wxMouseEvent &event);
+  void OnMouseRightDown(wxMouseEvent &event);
+  void OnMouseRightUp(wxMouseEvent &event);
+  void OnMouseMove(wxMouseEvent &event);
+  void OnMouseScroll(wxMouseEvent &event);
+
+  void Invoke(unsigned long event, void *callData = nullptr);
+
   MyInteractor *interactor;
   vtkRenderer *renderer;
 

@@ -1,5 +1,6 @@
 #include "MyInteractor.h"
 #include "Utils.h"
+#include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkRenderWindow.h>
 
 MyInteractor::MyInteractor(wxPanel *panel_) : panel{panel_} {
@@ -16,6 +17,10 @@ MyInteractor::~MyInteractor() {
 void MyInteractor::Initialize() {
   DEBUG_MESSAGE("%s", "MyInteractor::Initialize()");
   Parent::Initialize();
+
+  vtkNew<vtkInteractorStyleTrackballCamera> style;
+  SetInteractorStyle(style);
+
   RenderWindow->SetWindowId(utils::NativeHandle(panel));
   RenderWindow->SetParentId(utils::NativeHandle(panel->GetParent()));
   RenderWindow->SetDisplayId(RenderWindow->GetGenericDisplayId());
