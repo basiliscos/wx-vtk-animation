@@ -12,6 +12,7 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkRenderer.h>
 #include <vtkSphereSource.h>
+#include <vtkRendererCollection.h>
 
 MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
     : Parent(parent, wxID_ANY, wxDefaultPosition, {200, 100},
@@ -51,6 +52,7 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   // interactor->GetRenderWindow()->Render();
   // interactor->GetRenderWindow()->Render();
   // interactor->GetRenderWindow()->Render();
+  interactor->GetRenderWindow()->GetRenderers()->InitTraversal();
   interactor->GetRenderWindow()->Render();
   interactor->Start();
 
@@ -79,7 +81,7 @@ void MyPanel::OnRender(wxPaintEvent &event) {
  event.Skip();
  wxClientDC dc(this);
 
-  interactor->Render();
+  // interactor->Render();
   auto rw = interactor->GetRenderWindow();
 
   DEBUG_MESSAGE("MyPanel::OnRender, rw = %p, native = %p", rw,
@@ -99,6 +101,7 @@ void MyPanel::OnRender(wxPaintEvent &event) {
 
   rw->Render();
   rw->Frame();
+  Refresh();
 }
 
 void MyPanel::OnResize(wxSizeEvent &evt) {
