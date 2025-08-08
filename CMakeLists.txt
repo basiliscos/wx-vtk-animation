@@ -21,25 +21,28 @@ endif()
 
 find_package(Gettext)
 
-find_package(
-             VTK REQUIRED COMPONENTS
-             CommonColor
-             CommonCore
-             CommonDataModel
-             FiltersSources
-             InteractionStyle
-             RenderingContextOpenGL2
-             RenderingCore
-             RenderingFreeType
-             RenderingGL2PSOpenGL2
-             RenderingOpenGL2
-            )
+find_package(VTK COMPONENTS
+  CommonColor
+  CommonCore
+  CommonDataModel
+  FiltersSources
+  InteractionStyle
+  InteractionWidgets
+  RenderingAnnotation
+  RenderingContextOpenGL2
+  RenderingCore
+  RenderingFreeType
+  RenderingGL2PSOpenGL2
+  RenderingOpenGL2
+
+)
 
 add_executable(wva WIN32
     src/App.cpp
     src/MyInteractor.cpp
     src/MyPanel.cpp
     src/Utils.cpp
+
 )
 target_include_directories(wva PRIVATE ${GTK3_INCLUDE_DIRS})
 target_link_libraries(wva
@@ -51,3 +54,5 @@ target_link_libraries(wva
     Threads::Threads
 )
 
+# Required for vtk/windows. Without that it compiles, but does not render anything.
+vtk_module_autoinit(TARGETS wva MODULES ${VTK_LIBRARIES})

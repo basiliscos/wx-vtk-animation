@@ -56,6 +56,9 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   interactor->GetRenderWindow()->Render();
   interactor->Start();
 
+  auto backend = interactor->GetRenderWindow()->GetRenderingBackend();
+  DEBUG_MESSAGE("MyPanel::MyPanel, backend = %s\n", backend);
+
   parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
   parent->Bind(wxEVT_LISTBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
 
