@@ -43,18 +43,20 @@ int MyApp::OnExit() {
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
   auto sizer = new wxBoxSizer(wxVERTICAL);
-  auto tabs = new wxListbook(this, wxID_HIGHEST + 1, wxDefaultPosition,
-                             wxDefaultSize, wxNB_TOP);
+  // auto tabs = new wxListbook(this, wxID_HIGHEST + 1, wxDefaultPosition,
+                             // wxDefaultSize, wxNB_TOP);
 
-  auto page_0 = new MyPanel(tabs, "Green");
-  auto page_1 = new MyPanel(tabs, "Red");
-  auto page_2 = new MyPanel(tabs, "Cyan");
+  auto page_0 = new MyPanel(this, "Green");
+  // auto page_0 = new MyPanel(tabs, "Green");
+  // auto page_1 = new MyPanel(tabs, "Red");
+  // auto page_2 = new MyPanel(tabs, "Cyan");
 
-  tabs->AddPage(page_0, _("page_0"), true);
-  tabs->AddPage(page_1, _("page_1"), false);
-  tabs->AddPage(page_2, _("page_2"), false);
+  // tabs->AddPage(page_0, _("page_0"), true);
+  // tabs->AddPage(page_1, _("page_1"), false);
+  // tabs->AddPage(page_2, _("page_2"), false);
 
-  sizer->Add(tabs, 1, wxEXPAND);
+  // sizer->Add(tabs, 1, wxEXPAND);
+  sizer->Add(page_0, 1, wxEXPAND);
 
   SetSizerAndFit(sizer);
   PostSizeEvent();
