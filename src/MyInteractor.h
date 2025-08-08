@@ -5,8 +5,8 @@
 
 #include <wx/wx.h>
 
-struct MyInteractor : vtkGenericRenderWindowInteractor {
-  using Parent = vtkGenericRenderWindowInteractor;
+struct MyInteractor : vtkRenderWindowInteractor {
+  using Parent = vtkRenderWindowInteractor;
 
   MyInteractor(wxPanel *panel, vtkRenderWindow *RenderWindow);
   ~MyInteractor();
