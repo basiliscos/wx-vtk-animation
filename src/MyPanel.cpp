@@ -76,8 +76,10 @@ MyPanel::~MyPanel() {
 
 void MyPanel::OnRender(wxPaintEvent &event) {
   DEBUG_MESSAGE("%s", "MyPanel::OnRender");
+  interactor->Render();
   auto rw = interactor->GetRenderWindow();
   rw->WaitForCompletion();
+
   rw->Render();
   rw->Frame();
 }
