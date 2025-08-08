@@ -99,32 +99,58 @@ void MyPanel::OnTabChange(wxBookCtrlEvent &event) {
 
 void MyPanel::OnMouseDown(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseDown", this);
+
+  interactor->SetEventInformationFlipY
+  (
+      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
+  );
+
   Invoke(vtkCommand::LeftButtonPressEvent);
 }
 
 void MyPanel::OnMouseUp(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseUp", this);
+  interactor->SetEventInformationFlipY
+  (
+      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
+  );
   Invoke(vtkCommand::LeftButtonReleaseEvent);
 }
 
 void MyPanel::OnMouseRightDown(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightDown", this);
+  interactor->SetEventInformationFlipY
+  (
+      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
+  );
   Invoke(vtkCommand::RightButtonPressEvent);
 }
 
 void MyPanel::OnMouseRightUp(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightUp", this);
+  interactor->SetEventInformationFlipY
+  (
+      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
+  );
   Invoke(vtkCommand::RightButtonReleaseEvent);
 }
 
 void MyPanel::OnMouseMove(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseMove", this);
+  interactor->SetEventInformationFlipY
+  (
+      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
+  );
   Invoke(vtkCommand::MouseMoveEvent);
 }
 
 void MyPanel::OnMouseScroll(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseScroll", this);
 
+  interactor->SetEventInformationFlipY
+  (
+      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
+  );
   auto command = event.GetWheelRotation() > 0
                      ? vtkCommand::MouseWheelForwardEvent
                      : vtkCommand::MouseWheelBackwardEvent;
@@ -133,4 +159,5 @@ void MyPanel::OnMouseScroll(wxMouseEvent &event) {
 
 void MyPanel::Invoke(unsigned long event, void *callData) {
   interactor->InvokeEvent(event, callData);
+  Refresh();
 }
