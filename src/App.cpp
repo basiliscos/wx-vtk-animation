@@ -56,7 +56,10 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
   // tabs->AddPage(page_2, _("page_2"), false);
 
   // sizer->Add(tabs, 1, wxEXPAND);
-  sizer->Add(page_0, 1, wxEXPAND);
+  auto label = new wxStaticText(this, wxID_ANY, "hello");
+
+  sizer->Add(label, 0, 0);
+  sizer->Add(page_0, 10, wxEXPAND);
 
   SetSizerAndFit(sizer);
   PostSizeEvent();

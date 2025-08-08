@@ -2,9 +2,14 @@
 #include "Utils.h"
 #include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkRenderWindow.h>
+#include <vtkGenericRenderWindowInteractor.h>
 
-MyInteractor::MyInteractor(wxPanel *panel_) : panel{panel_} {
+MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_) : panel{panel_} {
+    this->RenderWindow = RenderWindow_;
+    // auto g = new vtkGenericRenderWindowInteractor();
+
   // this->RenderWindow->Delete();
+  SetRenderWindow(vtkSmartPointer<vtkRenderWindow>::New());
   DEBUG_MESSAGE("%s", "MyInteractor::MyInteractor()");
 }
 

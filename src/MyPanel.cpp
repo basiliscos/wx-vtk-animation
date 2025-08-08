@@ -13,10 +13,6 @@
 #include <vtkRenderer.h>
 #include <vtkSphereSource.h>
 
-BEGIN_EVENT_TABLE(MyPanel, wxPanel)
-EVT_PAINT(MyPanel::OnRender)
-EVT_SIZE(MyPanel::OnResize)
-END_EVENT_TABLE()
 
 MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
     : Parent(parent, wxID_ANY, wxDefaultPosition, {200, 100},
@@ -24,13 +20,13 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   SetBackgroundStyle(wxBG_STYLE_CUSTOM);
   SetMinSize(wxSize(250, 250));
 
-  render_window = vtkSmartPointer<vtkRenderWindow>::New();
+  // render_window = vtkSmartPointer<vtkRenderWindow>::New();
 
-  interactor = new MyInteractor(this);
-  interactor->SetRenderWindow(render_window);
+  interactor = new MyInteractor(this, nullptr);
+  // interactor->SetRenderWindow(render_window);
 
   renderer = vtkRenderer::New();
-  render_window->AddRenderer(renderer);
+  interactor->GetRenderWindow()->AddRenderer(renderer);
 
   renderer->SetBackground(0, 0, 0);
   renderer->ResetCamera();
@@ -53,11 +49,17 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   actor->GetProperty()->SetColor(colors->GetColor3d(sphere_color).GetData());
 
   renderer->AddActor(actor);
+  // interactor->GetRenderWindow()->Render();
+  // interactor->GetRenderWindow()->Render();
+  // interactor->GetRenderWindow()->Render();
   interactor->GetRenderWindow()->Render();
   interactor->Start();
 
   parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
   parent->Bind(wxEVT_LISTBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
+
+  Bind(wxEVT_PAINT, &MyPanel::OnRender, this);
+  Bind(wxEVT_SIZE, &MyPanel::OnResize, this);
 
   Bind(wxEVT_MOTION, &MyPanel::OnMouseMove, this);
   Bind(wxEVT_MOUSEWHEEL, &MyPanel::OnMouseScroll, this);
