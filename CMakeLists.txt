@@ -37,6 +37,9 @@ find_package(
 
 add_executable(wva WIN32
     src/App.cpp
+    src/MyInteractor.cpp
+    src/MyPanel.cpp
+    src/Utils.cpp
 )
 target_include_directories(wva PRIVATE ${GTK3_INCLUDE_DIRS})
 target_link_libraries(wva
