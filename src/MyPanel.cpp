@@ -13,7 +13,6 @@
 #include <vtkRenderer.h>
 #include <vtkSphereSource.h>
 
-
 MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
     : Parent(parent, wxID_ANY, wxDefaultPosition, {200, 100},
              wxFULL_REPAINT_ON_RESIZE) {
@@ -77,9 +76,9 @@ MyPanel::~MyPanel() {
 }
 
 void MyPanel::OnRender(wxPaintEvent &event) {
-  DEBUG_MESSAGE("%s", "MyPanel::OnRender");
   interactor->Render();
   auto rw = interactor->GetRenderWindow();
+  DEBUG_MESSAGE("MyPanel::OnRender, native = %p", rw->GetGenericWindowId());
   rw->WaitForCompletion();
 
   rw->Render();
@@ -104,57 +103,51 @@ void MyPanel::OnTabChange(wxBookCtrlEvent &event) {
 void MyPanel::OnMouseDown(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseDown", this);
 
-  interactor->SetEventInformationFlipY
-  (
-      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
-  );
+  interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
+                                       event.ControlDown(), event.ShiftDown(),
+                                       '\0', 0, nullptr);
 
   Invoke(vtkCommand::LeftButtonPressEvent);
 }
 
 void MyPanel::OnMouseUp(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseUp", this);
-  interactor->SetEventInformationFlipY
-  (
-      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
-  );
+  interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
+                                       event.ControlDown(), event.ShiftDown(),
+                                       '\0', 0, nullptr);
   Invoke(vtkCommand::LeftButtonReleaseEvent);
 }
 
 void MyPanel::OnMouseRightDown(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightDown", this);
-  interactor->SetEventInformationFlipY
-  (
-      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
-  );
+  interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
+                                       event.ControlDown(), event.ShiftDown(),
+                                       '\0', 0, nullptr);
   Invoke(vtkCommand::RightButtonPressEvent);
 }
 
 void MyPanel::OnMouseRightUp(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightUp", this);
-  interactor->SetEventInformationFlipY
-  (
-      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
-  );
+  interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
+                                       event.ControlDown(), event.ShiftDown(),
+                                       '\0', 0, nullptr);
   Invoke(vtkCommand::RightButtonReleaseEvent);
 }
 
 void MyPanel::OnMouseMove(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseMove", this);
-  interactor->SetEventInformationFlipY
-  (
-      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
-  );
+  interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
+                                       event.ControlDown(), event.ShiftDown(),
+                                       '\0', 0, nullptr);
   Invoke(vtkCommand::MouseMoveEvent);
 }
 
 void MyPanel::OnMouseScroll(wxMouseEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseScroll", this);
 
-  interactor->SetEventInformationFlipY
-  (
-      event.GetX(), event.GetY(), event.ControlDown(), event.ShiftDown(), '\0', 0, nullptr
-  );
+  interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
+                                       event.ControlDown(), event.ShiftDown(),
+                                       '\0', 0, nullptr);
   auto command = event.GetWheelRotation() > 0
                      ? vtkCommand::MouseWheelForwardEvent
                      : vtkCommand::MouseWheelBackwardEvent;

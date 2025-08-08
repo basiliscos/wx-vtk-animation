@@ -44,7 +44,7 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
   auto sizer = new wxBoxSizer(wxVERTICAL);
   // auto tabs = new wxListbook(this, wxID_HIGHEST + 1, wxDefaultPosition,
-                             // wxDefaultSize, wxNB_TOP);
+  // wxDefaultSize, wxNB_TOP);
 
   auto page_0 = new MyPanel(this, "Green");
   // auto page_0 = new MyPanel(tabs, "Green");
