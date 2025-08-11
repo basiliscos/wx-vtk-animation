@@ -47,7 +47,7 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
   auto tabs = new wxNotebook(this, wxID_HIGHEST + 1, wxDefaultPosition,
   wxDefaultSize, wxNB_TOP);
 
-  auto page_0 = new My2DPanel(this);
+  auto page_0 = new My2DPanel(tabs);
   auto page_1 = new My3DPanel(tabs, "Red");
   // auto page_2 = new My3DPanel(tabs, "Cyan");
 

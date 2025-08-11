@@ -75,7 +75,6 @@ My3DPanel::My3DPanel(wxWindow *parent, const char *sphere_color)
 My3DPanel::~My3DPanel() {
   DEBUG_MESSAGE("%s", "My3DPanel::~My3DPanel");
   renderer->Delete();
-  interactor->GetRenderWindow()->Delete();
   interactor->Delete();
 }
 
