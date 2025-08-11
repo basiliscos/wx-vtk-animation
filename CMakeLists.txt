@@ -22,19 +22,23 @@ endif()
 find_package(Gettext)
 
 find_package(VTK COMPONENTS
-  CommonColor
-  CommonCore
-  CommonDataModel
-  FiltersSources
-  InteractionStyle
-  InteractionWidgets
-  RenderingAnnotation
-  RenderingContextOpenGL2
-  RenderingCore
-  RenderingFreeType
-  RenderingGL2PSOpenGL2
-  RenderingOpenGL2
-
+    CommonColor
+    CommonCore
+    CommonDataModel
+    ChartsCore
+    FiltersSources
+    ImagingSources
+    InteractionStyle
+    InteractionWidgets
+    RenderingAnnotation
+    IOXML
+    IOGeometry
+    RenderingContextOpenGL2
+    RenderingCore
+    RenderingFreeType
+    RenderingGL2PSOpenGL2
+    RenderingOpenGL2
+    ViewsContext2D
 )
 
 add_executable(wva WIN32

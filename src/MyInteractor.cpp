@@ -5,13 +5,13 @@
 #include <vtkOpenGLRenderWindow.h>
 #include <vtkRenderWindow.h>
 
-MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_)
-    : panel{panel_} {
-
-    this->RenderWindow = NULL;
-    this->SetRenderWindow(vtkRenderWindow::New());
-    this->RenderWindow->Delete();
-    Enable();
+MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_,
+                           vtkContextInteractorStyle *style)
+    : panel{panel_}, style{style} {
+  this->RenderWindow = NULL;
+  this->SetRenderWindow(vtkRenderWindow::New());
+  this->RenderWindow->Delete();
+  Enable();
   DEBUG_MESSAGE("%s", "MyInteractor::MyInteractor()");
 }
 
@@ -23,7 +23,9 @@ void MyInteractor::Initialize() {
   Parent::Initialize();
   Enable();
 
-  vtkNew<vtkInteractorStyleTrackballCamera> style;
+  // vtkNew<vtkInteractorStyleTrackballCamera> style;
+  // SetInteractorStyle(style);
+
   SetInteractorStyle(style);
 
   auto rw = GetRenderWindow();
