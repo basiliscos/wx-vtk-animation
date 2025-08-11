@@ -44,7 +44,7 @@ find_package(VTK COMPONENTS
 add_executable(wva WIN32
     src/App.cpp
     src/MyInteractor.cpp
-    src/MyPanel.cpp
+    src/My2DPanel.cpp
     src/Utils.cpp
 
 )

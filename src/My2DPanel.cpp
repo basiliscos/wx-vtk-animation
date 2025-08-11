@@ -1,4 +1,4 @@
-#include "MyPanel.h"
+#include "My2DPanel.h"
 #include "Utils.h"
 
 #include <vtkAnimationCue.h>
@@ -46,7 +46,7 @@
 #include <vtkTextProperty.h>
 #include <vtkXMLTableReader.h>
 
-MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
+My2DPanel::My2DPanel(wxWindow *parent)
     : Parent(parent, wxID_ANY, wxDefaultPosition, {200, 100},
              wxFULL_REPAINT_ON_RESIZE) {
   SetBackgroundStyle(wxBG_STYLE_CUSTOM);
@@ -127,53 +127,53 @@ MyPanel::MyPanel(wxWindow *parent, const char *sphere_color)
   interactor->Start();
 
   auto backend = interactor->GetRenderWindow()->GetRenderingBackend();
-  DEBUG_MESSAGE("MyPanel::MyPanel, backend = %s\n", backend);
+  DEBUG_MESSAGE("My2DPanel::My2DPanel, backend = %s\n", backend);
 
-  parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
-  parent->Bind(wxEVT_LISTBOOK_PAGE_CHANGED, &MyPanel::OnTabChange, this);
+  parent->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, &My2DPanel::OnTabChange, this);
+  parent->Bind(wxEVT_LISTBOOK_PAGE_CHANGED, &My2DPanel::OnTabChange, this);
 
-  Bind(wxEVT_PAINT, &MyPanel::OnRender, this);
-  Bind(wxEVT_SIZE, &MyPanel::OnResize, this);
+  Bind(wxEVT_PAINT, &My2DPanel::OnRender, this);
+  Bind(wxEVT_SIZE, &My2DPanel::OnResize, this);
 
-  Bind(wxEVT_MOTION, &MyPanel::OnMouseMove, this);
-  Bind(wxEVT_MOUSEWHEEL, &MyPanel::OnMouseScroll, this);
-  Bind(wxEVT_LEFT_DOWN, &MyPanel::OnMouseDown, this);
-  Bind(wxEVT_LEFT_UP, &MyPanel::OnMouseUp, this);
-  Bind(wxEVT_RIGHT_DOWN, &MyPanel::OnMouseRightDown, this);
-  Bind(wxEVT_RIGHT_UP, &MyPanel::OnMouseRightUp, this);
+  Bind(wxEVT_MOTION, &My2DPanel::OnMouseMove, this);
+  Bind(wxEVT_MOUSEWHEEL, &My2DPanel::OnMouseScroll, this);
+  Bind(wxEVT_LEFT_DOWN, &My2DPanel::OnMouseDown, this);
+  Bind(wxEVT_LEFT_UP, &My2DPanel::OnMouseUp, this);
+  Bind(wxEVT_RIGHT_DOWN, &My2DPanel::OnMouseRightDown, this);
+  Bind(wxEVT_RIGHT_UP, &My2DPanel::OnMouseRightUp, this);
 }
 
-MyPanel::~MyPanel() {
-  DEBUG_MESSAGE("%s", "MyPanel::~MyPanel");
+My2DPanel::~My2DPanel() {
+  DEBUG_MESSAGE("%s", "My2DPanel::~My2DPanel");
   renderer->Delete();
   interactor->Delete();
 }
 
-void MyPanel::OnRender(wxPaintEvent &event) {
+void My2DPanel::OnRender(wxPaintEvent &event) {
   auto rw = interactor->GetRenderWindow();
 
-  DEBUG_MESSAGE("MyPanel::OnRender, rw = %p, native = %p", rw,
+  DEBUG_MESSAGE("My2DPanel::OnRender, rw = %p, native = %p", rw,
                 rw->GetGenericWindowId());
   rw->Render();
 }
 
-void MyPanel::OnResize(wxSizeEvent &evt) {
+void My2DPanel::OnResize(wxSizeEvent &evt) {
   auto w = evt.GetSize().GetWidth();
   auto h = evt.GetSize().GetHeight();
-  DEBUG_MESSAGE("MyPanel::OnResize %d x %d", w, h);
+  DEBUG_MESSAGE("My2DPanel::OnResize %d x %d", w, h);
   interactor->UpdateSize(w, h);
   Refresh();
 }
 
-void MyPanel::OnTabChange(wxBookCtrlEvent &event) {
+void My2DPanel::OnTabChange(wxBookCtrlEvent &event) {
   DEBUG_MESSAGE("%s %p", "MyFrame::OnTabChange", this);
   // interactor->GetRenderWindow()->Initialize();
   // interactor->Initialize();
   // interactor->GetRenderWindow()->WindowRemap();
 }
 
-void MyPanel::OnMouseDown(wxMouseEvent &event) {
-  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseDown", this);
+void My2DPanel::OnMouseDown(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "My2DPanel::OnMouseDown", this);
 
   interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
                                        event.ControlDown(), event.ShiftDown(),
@@ -182,40 +182,40 @@ void MyPanel::OnMouseDown(wxMouseEvent &event) {
   Invoke(vtkCommand::LeftButtonPressEvent);
 }
 
-void MyPanel::OnMouseUp(wxMouseEvent &event) {
-  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseUp", this);
+void My2DPanel::OnMouseUp(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "My2DPanel::OnMouseUp", this);
   interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
                                        event.ControlDown(), event.ShiftDown(),
                                        '\0', 0, nullptr);
   Invoke(vtkCommand::LeftButtonReleaseEvent);
 }
 
-void MyPanel::OnMouseRightDown(wxMouseEvent &event) {
-  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightDown", this);
+void My2DPanel::OnMouseRightDown(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "My2DPanel::OnMouseRightDown", this);
   interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
                                        event.ControlDown(), event.ShiftDown(),
                                        '\0', 0, nullptr);
   Invoke(vtkCommand::RightButtonPressEvent);
 }
 
-void MyPanel::OnMouseRightUp(wxMouseEvent &event) {
-  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseRightUp", this);
+void My2DPanel::OnMouseRightUp(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "My2DPanel::OnMouseRightUp", this);
   interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
                                        event.ControlDown(), event.ShiftDown(),
                                        '\0', 0, nullptr);
   Invoke(vtkCommand::RightButtonReleaseEvent);
 }
 
-void MyPanel::OnMouseMove(wxMouseEvent &event) {
-  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseMove", this);
+void My2DPanel::OnMouseMove(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "My2DPanel::OnMouseMove", this);
   interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
                                        event.ControlDown(), event.ShiftDown(),
                                        '\0', 0, nullptr);
   Invoke(vtkCommand::MouseMoveEvent);
 }
 
-void MyPanel::OnMouseScroll(wxMouseEvent &event) {
-  DEBUG_MESSAGE("%s %p", "MyPanel::OnMouseScroll", this);
+void My2DPanel::OnMouseScroll(wxMouseEvent &event) {
+  DEBUG_MESSAGE("%s %p", "My2DPanel::OnMouseScroll", this);
 
   interactor->SetEventInformationFlipY(event.GetX(), event.GetY(),
                                        event.ControlDown(), event.ShiftDown(),
@@ -226,7 +226,7 @@ void MyPanel::OnMouseScroll(wxMouseEvent &event) {
   Invoke(command);
 }
 
-void MyPanel::Invoke(unsigned long event, void *callData) {
+void My2DPanel::Invoke(unsigned long event, void *callData) {
   interactor->InvokeEvent(event, callData);
   Refresh();
 }

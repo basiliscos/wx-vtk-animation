@@ -5,7 +5,7 @@
 #include <wx/listbook.h>
 #include <wx/notebook.h>
 
-#include "MyPanel.h"
+#include "My2DPanel.h"
 #include "Utils.h"
 
 class MyApp : public wxApp {
@@ -23,7 +23,6 @@ public:
 private:
   wxSlider *slider;
   wxButton *button;
-  MyPanel *panel;
 };
 
 bool MyApp::OnInit() {
@@ -46,13 +45,13 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
   auto tabs = new wxListbook(this, wxID_HIGHEST + 1, wxDefaultPosition,
   wxDefaultSize, wxNB_TOP);
 
-  auto page_0 = new MyPanel(this, "Green");
+  auto page_0 = new My2DPanel(this);
   // auto page_0 = new MyPanel(tabs, "Green");
-  auto page_1 = new MyPanel(tabs, "Red");
+  // auto page_1 = new MyPanel(tabs, "Red");
   // auto page_2 = new MyPanel(tabs, "Cyan");
 
-  tabs->AddPage(page_0, _("page_0"), true);
-  tabs->AddPage(page_1, _("page_1"), false);
+  tabs->AddPage(page_0, _("2D"), true);
+  // tabs->AddPage(page_1, _("page_1"), false);
   // tabs->AddPage(page_2, _("page_2"), false);
 
   sizer->Add(tabs, 1, wxEXPAND);

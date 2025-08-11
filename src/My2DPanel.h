@@ -7,11 +7,11 @@
 #include <wx/notebook.h>
 #include <wx/wx.h>
 
-struct MyPanel : public wxPanel {
+struct My2DPanel : public wxPanel {
   using Parent = wxPanel;
 
-  MyPanel(wxWindow *parent, const char *sphere_color);
-  ~MyPanel();
+  My2DPanel(wxWindow *parent);
+  ~My2DPanel();
 
   void OnRender(wxPaintEvent &event);
   void OnResize(wxSizeEvent &evt);
