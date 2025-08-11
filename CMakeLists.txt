@@ -45,6 +45,7 @@ add_executable(wva WIN32
     src/App.cpp
     src/MyInteractor.cpp
     src/My2DPanel.cpp
+    src/My3DPanel.cpp
     src/Utils.cpp
 
 )

@@ -1,12 +1,10 @@
 #include "MyInteractor.h"
 #include "Utils.h"
-#include <vtkGenericRenderWindowInteractor.h>
-#include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkOpenGLRenderWindow.h>
 #include <vtkRenderWindow.h>
 
 MyInteractor::MyInteractor(wxPanel *panel_, vtkRenderWindow *RenderWindow_,
-                           vtkContextInteractorStyle *style)
+                           vtkInteractorStyle *style)
     : panel{panel_}, style{style} {
   this->RenderWindow = NULL;
   this->SetRenderWindow(vtkRenderWindow::New());

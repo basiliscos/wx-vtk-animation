@@ -6,6 +6,8 @@
 #include <wx/notebook.h>
 
 #include "My2DPanel.h"
+#include "My3DPanel.h"
+
 #include "Utils.h"
 
 class MyApp : public wxApp {
@@ -46,12 +48,11 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
   wxDefaultSize, wxNB_TOP);
 
   auto page_0 = new My2DPanel(this);
-  // auto page_0 = new MyPanel(tabs, "Green");
-  // auto page_1 = new MyPanel(tabs, "Red");
-  // auto page_2 = new MyPanel(tabs, "Cyan");
+  auto page_1 = new My3DPanel(tabs, "Red");
+  // auto page_2 = new My3DPanel(tabs, "Cyan");
 
   tabs->AddPage(page_0, _("2D"), true);
-  // tabs->AddPage(page_1, _("page_1"), false);
+  tabs->AddPage(page_1, _("3D/red"), false);
   // tabs->AddPage(page_2, _("page_2"), false);
 
   sizer->Add(tabs, 1, wxEXPAND);
