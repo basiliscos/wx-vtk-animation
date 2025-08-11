@@ -44,7 +44,7 @@ int MyApp::OnExit() {
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
   auto sizer = new wxBoxSizer(wxVERTICAL);
-  auto tabs = new wxListbook(this, wxID_HIGHEST + 1, wxDefaultPosition,
+  auto tabs = new wxNotebook(this, wxID_HIGHEST + 1, wxDefaultPosition,
   wxDefaultSize, wxNB_TOP);
 
   auto page_0 = new My2DPanel(this);
